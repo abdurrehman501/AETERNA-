@@ -4,9 +4,9 @@ A responsive, animation-driven concept website for **AETERNA**, a fictional ultr
 
 > **Note:** This is a portfolio demonstration. The brand, products, address, email and all content are fictional, and the contact form does not send any data.
 
-**Live Demo:** https://YOUR-SITE-NAME.netlify.app
+**Live Demo:** https://aeterna-demo.netlify.app
 
-![AETERNA homepage preview](screenshot.png)
+<img width="1896" height="941" alt="Screenshot 2026-10-10 223655" src="https://github.com/user-attachments/assets/249cfac0-33da-4a27-9cb0-6c10a61008b9" />
 
 ## Features
 
@@ -30,27 +30,7 @@ A responsive, animation-driven concept website for **AETERNA**, a fictional ultr
 
 ## Getting Started
 
-No build step or dependencies to install.
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/YOUR-USERNAME/YOUR-REPO-NAME.git
-   ```
-2. Open the folder and double-click `index.html`, or serve it locally:
-   ```bash
-   npx serve .
-   ```
-
-An internet connection is needed for the CDN scripts and Google Fonts.
-
-## Project Structure
-
-```
-├── index.html     # Markup, styles and scripts in one file
-├── README.md
-├── screenshot.png # Homepage preview
-└── .gitignore
-```
+   git clone https://github.com/abdurrehman501/AETERNA-.git
 
 ## Colour Palette
 
