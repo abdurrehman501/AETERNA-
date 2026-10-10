@@ -1,0 +1,1604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AETERNA | Botanical Haute Horlogerie</title>
+    <meta name="description" content="Contemporary ultra-luxury watch portfolio featuring bespoke material aesthetics and fluid interactions.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Space+Grotesk:wght@300;400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Animation Libraries -->
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <style>
+/* ==========================================================================
+   AETERNA REFINED ROYAL PALETTE & TYPOGRAPHY
+   ========================================================================== */
+
+:root {
+  /* Core Royal & Forest Tones */
+  --color-forest: #082017;
+  --color-forest-dark: #020705;
+  --color-sage: #112E24;
+  --color-sage-light: #94B8A8;
+  
+  /* Classy Gold & Muted Metallic Accents */
+  --color-gold: #D4AF37;
+  --color-gold-light: #F4E8C1;
+  --color-champagne-gold: #E5C558;   
+  --color-bronze-accent: #B8860B;
+  
+  /* Backgrounds & High Contrast Neutrals */
+  --color-cream: #082017;
+  --color-offwhite: #020705;
+  --color-white: #FFFFFF;
+  --color-beige-card: #112E24;
+  --color-border: rgba(229, 197, 88, 0.2);
+  --color-border-dark: #020705;
+
+  --color-text-dark: #F1F5F9;
+  --color-text-muted: #94A3B8;
+  --color-text-light: #FFFFFF;
+
+  /* Typography Structure */
+  --font-serif: 'Cinzel Decorative', serif;
+  --font-serif-alt: 'Playfair Display', serif;
+  --font-sans: 'Plus Jakarta Sans', sans-serif;
+  --font-mono: 'Space Grotesk', monospace;
+}
+
+/* Global Reset & Base Rules */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background-color: var(--color-forest-dark);
+  color: var(--color-text-dark);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-forest-dark);
+  cursor: default;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background-color: var(--color-champagne-gold);
+  color: var(--color-forest-dark);
+}
+
+a {
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+/* Custom Interactive Cursor */
+.custom-cursor,
+.custom-cursor-follower {
+  display: none;
+}
+
+@media (pointer: fine) and (min-width: 1025px) {
+  .custom-cursor {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 8px;
+    height: 8px;
+    background: linear-gradient(135deg, var(--color-bronze-accent), var(--color-champagne-gold));
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 10px var(--color-champagne-gold);
+  }
+
+  .custom-cursor-follower {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 32px;
+    height: 32px;
+    border: 1.5px solid rgba(229, 197, 88, 0.4);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: transform 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+}
+
+/* Page Ornamentation & Royal Filigree Accents */
+.corner-ornament {
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  pointer-events: none;
+  opacity: 0.6;
+  z-index: 2;
+}
+.corner-ornament-tl { top: 1.25rem; left: 1.25rem; border-top: 1.5px solid var(--color-champagne-gold); border-left: 1.5px solid var(--color-champagne-gold); }
+.corner-ornament-tr { top: 1.25rem; right: 1.25rem; border-top: 1.5px solid var(--color-champagne-gold); border-right: 1.5px solid var(--color-champagne-gold); }
+.corner-ornament-bl { bottom: 1.25rem; left: 1.25rem; border-bottom: 1.5px solid var(--color-champagne-gold); border-left: 1.5px solid var(--color-champagne-gold); }
+.corner-ornament-br { bottom: 1.25rem; right: 1.25rem; border-bottom: 1.5px solid var(--color-champagne-gold); border-right: 1.5px solid var(--color-champagne-gold); }
+
+/* Preloader Overlay */
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-forest-dark);
+  transition: opacity 0.8s ease;
+}
+
+.loader-brand {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  letter-spacing: 0.3em;
+  background: linear-gradient(90deg, var(--color-champagne-gold), var(--color-white));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  opacity: 0;
+}
+
+.loader-bar-bg {
+  width: 12rem;
+  height: 2px;
+  background-color: rgba(255, 255, 255, 0.1);
+  margin: 1.5rem 0;
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.loader-progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 0%;
+  background: linear-gradient(90deg, var(--color-bronze-accent), var(--color-champagne-gold));
+  transition: all 0.3s ease;
+}
+
+.loader-percent-text {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  color: var(--color-champagne-gold);
+  font-weight: 500;
+}
+
+/* Navigation Bar */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 40;
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(2, 7, 5, 0.88);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(229, 197, 88, 0.15);
+}
+
+@media (min-width: 768px) {
+  .navbar {
+    padding: 1.2rem 3rem;
+  }
+}
+
+.nav-logo {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  background: linear-gradient(135deg, var(--color-champagne-gold), var(--color-white));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.nav-link {
+  color: #FFFFFF !important; 
+  text-decoration: none !important;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: var(--color-champagne-gold) !important;
+}
+
+/* Royal Magnetic Buttons */
+.magnetic-btn {
+  display: inline-block;
+  position: relative;
+  padding: 0.6rem 1.4rem;
+  border: 1px solid rgba(229, 197, 88, 0.4);
+  border-radius: 9999px;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  overflow: hidden;
+  cursor: pointer;
+  background: transparent;
+  color: #FFFFFF;
+  font-weight: 600;
+  text-decoration: none !important;
+  transition: border-color 0.3s ease;
+}
+
+.magnetic-btn:hover {
+  border-color: var(--color-champagne-gold);
+}
+
+.magnetic-btn .btn-text {
+  position: relative;
+  z-index: 10;
+  transition: color 0.4s ease;
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+.magnetic-btn:hover .btn-text {
+  color: var(--color-forest-dark);
+}
+
+.magnetic-btn .btn-fill {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--color-champagne-gold), var(--color-white));
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.magnetic-btn:hover .btn-fill {
+  transform: translateY(0);
+}
+
+.hero-btn {
+  padding: 0.8rem 2rem;
+  background: linear-gradient(135deg, var(--color-champagne-gold), var(--color-bronze-accent));
+  border: none;
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.15);
+}
+
+.hero-btn .btn-text {
+  color: var(--color-forest-dark) !important;
+  font-weight: 700;
+}
+
+.hero-btn:hover .btn-text {
+  color: #FFFFFF !important;
+}
+
+.hero-btn .btn-fill {
+  background: var(--color-forest-dark);
+}
+
+.btn-submit {
+  width: 100%;
+  padding: 1.1rem 0;
+  background-color: var(--color-forest);
+  color: var(--color-white);
+  border-radius: 6px;
+  border: 1px solid var(--color-champagne-gold);
+  margin-top: 0.5rem;
+}
+
+.btn-submit .btn-text {
+  color: var(--color-white);
+  font-weight: 600;
+}
+
+.btn-submit:hover .btn-text {
+  color: var(--color-forest-dark);
+}
+
+.btn-submit .btn-fill {
+  background: linear-gradient(90deg, var(--color-champagne-gold), var(--color-white));
+}
+
+/* HERO SECTION */
+#hero {
+  position: relative;
+  padding: 9rem 1.5rem 5rem 1.5rem;
+  background-color: var(--color-forest-dark);
+  background-image: 
+    radial-gradient(circle at 80% 30%, rgba(229, 197, 88, 0.04) 0%, transparent 40%),
+    radial-gradient(circle at 20% 70%, rgba(184, 134, 11, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(2, 7, 5, 0.95) 0%, var(--color-forest-dark) 100%);
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  #hero {
+    padding: 12rem 3rem 6rem 3rem;
+  }
+}
+
+.hero-container {
+  max-width: 80rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3.5rem;
+  align-items: center;
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .hero-container {
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 6rem;
+  }
+}
+
+.hero-tag {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: var(--color-champagne-gold);
+  margin-bottom: 1.25rem;
+  display: inline-block;
+  background: rgba(229, 197, 88, 0.05);
+  padding: 0.4rem 1rem;
+  border-radius: 30px;
+  border: 1px solid rgba(229, 197, 88, 0.15);
+  font-weight: 600;
+}
+
+.hero-title {
+  font-family: var(--font-serif-alt);
+  font-size: clamp(2.5rem, 5vw, 4.2rem);
+  line-height: 1.12;
+  color: var(--color-white);
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+}
+
+.hero-title em {
+  font-style: italic;
+  font-family: var(--font-serif-alt);
+  background: linear-gradient(120deg, var(--color-champagne-gold), var(--color-white), var(--color-bronze-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-desc {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  max-width: 34rem;
+  line-height: 1.7;
+  font-weight: 400;
+  margin-bottom: 2.5rem;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.hero-text-link {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--color-champagne-gold);
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.hero-text-link:hover {
+  transform: translateX(0.35rem);
+  color: var(--color-white);
+}
+
+/* Watch Box Frame */
+.hero-image-frame {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  background: rgba(8, 32, 23, 0.3);
+  backdrop-filter: blur(12px);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(2, 7, 5, 0.6), inset 0 0 20px rgba(229, 197, 88, 0.03);
+  border: 1px solid rgba(229, 197, 88, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem; /* Increase this (e.g., 2.5rem) to make the watch smaller, or decrease it (e.g., 1rem) to make it larger */
+  position: relative;
+}
+
+.hero-img {
+  width: 120%;
+  height: 129%;
+  object-fit: contain; /* Ensures the whole watch stays visible without cropping */
+  object-position: center; /* Centers the watch precisely in the frame */
+  position: relative;
+  z-index: 2;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  filter: drop-shadow(0 10px 20px rgba(2, 7, 5, 0.6)) opacity(0.95);
+}
+
+.hero-image-frame:hover .hero-img {
+  transform: scale(1.02) rotate(0.3deg);
+}
+
+/* STATS BANNER */
+.stats-banner {
+  background: linear-gradient(90deg, #020705, #082017, #020705);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  padding: 3.5rem 1.5rem;
+  position: relative;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .stats-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+}
+
+.stat-card {
+  padding: 1.5rem 1rem;
+  border-radius: 8px;
+  background: rgba(17, 46, 36, 0.5);
+  border: 1px solid rgba(229, 197, 88, 0.15);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-champagne-gold);
+}
+
+.stat-number {
+  display: block;
+  font-family: var(--font-serif-alt);
+  font-size: 2.2rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, var(--color-champagne-gold), var(--color-white));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.stat-label {
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--color-sage-light);
+  margin-top: 0.5rem;
+  display: block;
+  font-weight: 600;
+}
+
+/* General Section Layouts */
+.section-padding {
+  padding: 6rem 1.5rem;
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding: 8rem 3rem;
+  }
+}
+
+.bg-cream {
+  background-color: var(--color-forest);
+}
+
+.bg-white {
+  background-color: var(--color-forest-dark);
+}
+
+.bg-offwhite {
+  background-color: var(--color-forest-dark);
+}
+
+.bg-forest {
+  background: linear-gradient(135deg, var(--color-forest-dark), var(--color-forest), var(--color-sage));
+}
+
+.border-section-top {
+  border-top: 1px solid var(--color-border);
+}
+
+.container-max {
+  max-width: 80rem;
+  margin: 0 auto;
+}
+
+.container-narrow {
+  max-width: 50rem;
+  margin: 0 auto;
+}
+
+.section-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 3.5rem;
+  gap: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .section-header {
+    flex-direction: row;
+    align-items: flex-end;
+    margin-bottom: 5rem;
+    gap: 2rem;
+  }
+}
+
+.section-tag, .section-tag-light {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: var(--color-champagne-gold);
+  font-weight: 600;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+.section-title {
+  font-family: var(--font-serif-alt);
+  font-size: clamp(2.2rem, 3.8vw, 3rem);
+  color: var(--color-white);
+  line-height: 1.15;
+  font-weight: 600;
+}
+
+.section-description {
+  color: var(--color-text-muted);
+  font-weight: 400;
+  max-width: 28rem;
+  font-size: 0.92rem;
+  line-height: 1.7;
+  font-family: var(--font-sans);
+}
+
+/* COLLECTIONS GRID */
+.collections-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+@media (min-width: 768px) {
+  .collections-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+  
+  .card-offset {
+    transform: translateY(3rem);
+  }
+}
+
+.collection-card {
+  background-color: var(--color-sage);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 1.5rem;
+  transition: box-shadow 0.4s ease, transform 0.4s ease, border-color 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.collection-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-champagne-gold), var(--color-bronze-accent));
+  opacity: 0.8;
+}
+
+.collection-card:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  transform: translateY(-0.3rem);
+  border-color: var(--color-champagne-gold);
+}
+
+.card-image-box {
+  aspect-ratio: 4 / 5;
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  position: relative;
+  background-color: var(--color-forest-dark);
+  border-radius: 6px;
+  border: 1px solid rgba(229, 197, 88, 0.1);
+}
+
+.badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 10;
+  background-color: rgba(2, 7, 5, 0.85);
+  backdrop-filter: blur(4px);
+  color: var(--color-champagne-gold);
+  border: 1px solid rgba(229, 197, 88, 0.3);
+  font-family: var(--font-sans);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  padding: 0.3rem 0.7rem;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+.card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s ease;
+}
+
+.collection-card:hover .card-img {
+  transform: scale(1.04);
+}
+
+.card-edition {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  color: var(--color-champagne-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-weight: 600;
+}
+
+.card-title {
+  font-family: var(--font-serif-alt);
+  font-size: 1.35rem;
+  color: var(--color-white);
+  margin: 0.4rem 0 0.6rem 0;
+  font-weight: 600;
+}
+
+.card-desc {
+  color: var(--color-text-muted);
+  font-size: 0.88rem;
+  font-weight: 400;
+  line-height: 1.65;
+  margin-bottom: 1.5rem;
+  font-family: var(--font-sans);
+}
+
+.card-link {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--color-champagne-gold);
+  font-weight: 600;
+  text-decoration: none;
+  gap: 0.5rem;
+}
+
+.card-link .arrow {
+  transition: transform 0.3s ease;
+}
+
+.card-link:hover .arrow {
+  transform: translateX(0.4rem);
+}
+
+/* CRAFTSMANSHIP / SAVOIR-FAIRE */
+.craftsmanship-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3.5rem;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .craftsmanship-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+  }
+}
+
+.feature-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.accordion-item {
+  border-left: 2px solid var(--color-border);
+  padding-left: 1.25rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  cursor: pointer;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+  border-radius: 0 6px 6px 0;
+}
+
+.accordion-item.active {
+  border-left-color: var(--color-champagne-gold);
+  background: rgba(17, 46, 36, 0.3);
+}
+
+.accordion-title {
+  font-family: var(--font-serif-alt);
+  font-size: 1.15rem;
+  color: var(--color-white);
+  font-weight: 600;
+}
+
+.accordion-desc {
+  color: var(--color-text-muted);
+  font-size: 0.88rem;
+  margin-top: 0.3rem;
+  line-height: 1.65;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.4s ease, opacity 0.4s ease, margin-top 0.4s ease;
+  font-family: var(--font-sans);
+}
+
+.accordion-item.active .accordion-desc {
+  max-height: 120px;
+  opacity: 1;
+  margin-top: 0.5rem;
+}
+
+.craft-feature-card {
+  background: linear-gradient(145deg, #082017, #112E24);
+  border: 1px solid rgba(229, 197, 88, 0.3);
+  border-radius: 12px;
+  padding: 2.5rem 2rem;
+  position: relative;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+.craft-number {
+  font-family: var(--font-serif-alt);
+  font-size: 2.4rem;
+  background: linear-gradient(135deg, var(--color-champagne-gold), var(--color-white));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1;
+  display: block;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.craft-card-title {
+  font-family: var(--font-serif-alt);
+  font-size: 1.5rem;
+  color: var(--color-white);
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+}
+
+.craft-card-desc {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+  font-family: var(--font-sans);
+}
+
+.craft-metrics {
+  display: flex;
+  gap: 3rem;
+  border-top: 1px solid var(--color-border);
+  padding-top: 1.5rem;
+}
+
+.metric-val {
+  display: block;
+  font-family: var(--font-serif-alt);
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--color-champagne-gold);
+}
+
+.metric-lbl {
+  font-family: var(--font-sans);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--color-sage-light);
+  font-weight: 600;
+}
+
+/* HERITAGE TIMELINE */
+.timeline-container {
+  position: relative;
+  border-left: 2px solid rgba(229, 197, 88, 0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+  padding-left: 2rem;
+  margin-left: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .timeline-container {
+    padding-left: 4rem;
+    margin-left: 4rem;
+  }
+}
+
+.timeline-item {
+  position: relative;
+}
+
+.timeline-node {
+  position: absolute;
+  left: -2.35rem;
+  top: 0.3rem;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  background-color: var(--color-champagne-gold);
+  border: 2px solid var(--color-forest-dark);
+}
+
+@media (min-width: 768px) {
+  .timeline-node {
+    left: -4.35rem;
+  }
+}
+
+.timeline-year {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  color: var(--color-champagne-gold);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.timeline-title {
+  font-family: var(--font-serif-alt);
+  font-size: 1.3rem;
+  color: var(--color-white);
+  margin: 0.3rem 0 0.5rem 0;
+  font-weight: 600;
+}
+
+.timeline-desc {
+  color: var(--color-text-muted);
+  font-size: 0.88rem;
+  font-weight: 400;
+  line-height: 1.65;
+  font-family: var(--font-sans);
+}
+
+/* PHILOSOPHY SECTION */
+.philosophy-container {
+  max-width: 48rem;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+}
+
+.quote-text {
+  font-family: var(--font-serif-alt);
+  font-size: clamp(1.3rem, 2.8vw, 2.2rem);
+  line-height: 1.5;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--color-white);
+  margin: 1.5rem 0 2rem 0;
+}
+
+.quote-author {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  color: var(--color-champagne-gold);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* CONTACT & FORM */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3.5rem;
+}
+
+@media (min-width: 768px) {
+  .contact-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+  }
+}
+
+.contact-info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  font-size: 0.88rem;
+  color: var(--color-text-dark);
+  font-family: var(--font-sans);
+}
+
+.info-label {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 9px;
+  color: var(--color-champagne-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  margin-bottom: 0.25rem;
+  font-weight: 600;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .form-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  background-color: var(--color-sage);
+  border: 1px solid var(--color-border);
+  padding: 1rem 1.2rem;
+  font-size: 0.8rem;
+  font-family: var(--font-sans);
+  letter-spacing: 0.08em;
+  color: var(--color-white);
+  border-radius: 6px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  font-weight: 500;
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: var(--color-sage-light);
+  opacity: 0.6;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--color-champagne-gold);
+  box-shadow: 0 0 12px rgba(229, 197, 88, 0.2);
+}
+
+/* FOOTER */
+.footer {
+  background-color: var(--color-forest-dark);
+  padding: 3rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  color: var(--color-sage-light);
+  gap: 1rem;
+  border-top: 1px solid rgba(229, 197, 88, 0.15);
+  font-weight: 600;
+}
+
+@media (min-width: 768px) {
+  .footer {
+    padding: 3rem 3rem;
+    flex-direction: row;
+    gap: 0;
+  }
+}
+
+.footer-tagline {
+  letter-spacing: 0.22em;
+  background: linear-gradient(90deg, var(--color-champagne-gold), var(--color-white));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Responsive Hide */
+@media (max-width: 767px) {
+  .nav-links {
+    display: none;
+  }
+}
+    </style>
+</head>
+<body>
+
+    <!-- Custom Cursor -->
+    <div id="cursor" class="custom-cursor"></div>
+    <div id="cursor-follower" class="custom-cursor-follower"></div>
+
+    <!-- Editorial Preloader -->
+    <div id="loader" class="preloader">
+        <span class="loader-brand">AETERNA</span>
+        <div class="loader-bar-bg">
+            <div id="loader-progress" class="loader-progress-bar"></div>
+        </div>
+        <span id="loader-percent" class="loader-percent-text">00 %</span>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <a href="#hero" class="nav-logo">AETERNA</a>
+        <div class="nav-links">
+            <a href="#collections" class="nav-link">Collections</a>
+            <a href="#craftsmanship" class="nav-link">Savoir-Faire</a>
+            <a href="#heritage" class="nav-link">Heritage</a>
+            <a href="#philosophy" class="nav-link">Ethos</a>
+        </div>
+        <a href="#contact" class="magnetic-btn">
+            <span class="btn-text">Private Consultation</span>
+            <div class="btn-fill"></div>
+        </a>
+    </nav>
+
+    <!-- Main Container -->
+    <main id="main-content">
+
+        <!-- HERO SECTION -->
+        <section id="hero">
+            <div class="corner-ornament corner-ornament-tl"></div>
+            <div class="corner-ornament corner-ornament-tr"></div>
+            
+            <div class="hero-container">
+                <div class="hero-text-col">
+                    <span class="hero-tag">Edition MMXXVI — Atelier Geneva</span>
+                    <h1 class="hero-title">Timeless <br><em>Elegance</em></h1>
+                    <p class="hero-desc">
+                        A stunning fusion of expert Swiss mechanics and clean, nature-inspired design. Hand-carved with unique artistic patterns for true collectors.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="#collections" class="magnetic-btn hero-btn">
+                            <span class="btn-text">View Gallery</span>
+                            <div class="btn-fill"></div>
+                        </a>
+                        <a href="#craftsmanship" class="hero-text-link">Explore Craftsmanship →</a>
+                    </div>
+                </div>
+
+                <div class="hero-media-col">
+                    <div class="hero-image-frame">
+                        <!-- Optional ambient back-glow matching your gold/forest vibe -->
+                        <div class="watch-glow" style="position: absolute; width: 60%; height: 60%; background: radial-gradient(circle, rgba(229,197,88,0.12) 0%, transparent 70%); filter: blur(30px); z-index: 1; pointer-events: none;"></div>
+                        
+                        <!-- Replace 'your-real-watch.png' with your actual image path or URL -->
+                        <img src="rolex.webp" alt="Aeterna Luxury Timepiece" class="hero-img" style="position: relative; z-index: 2;">
+                    </div>
+                </div>
+                
+        </section>
+
+        <!-- STATS BANNER -->
+        <section class="stats-banner">
+            <div class="corner-ornament corner-ornament-bl"></div>
+            <div class="corner-ornament corner-ornament-br"></div>
+            <div class="container-max stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">72h</span>
+                    <span class="stat-label">Power Reserve</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">100m</span>
+                    <span class="stat-label">Water Resistance</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">18K</span>
+                    <span class="stat-label">Champagne Gold Accents</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">0.02mm</span>
+                    <span class="stat-label">Tolerance Precision</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- FEATURED COLLECTIONS SECTION -->
+        <section id="collections" class="section-padding bg-cream">
+            <div class="container-max">
+                <div class="section-header">
+                    <div>
+                        <span class="section-tag">The Vault of Time</span>
+                        <h2 class="section-title">Iconic Masterpieces</h2>
+                    </div>
+                    <p class="section-description">
+                        An extraordinary convergence of celestial inspiration and avant-garde horology, forged for those who command eternity.
+                    </p>
+                </div>
+
+                <!-- Collection Cards Grid -->
+                <div class="collections-grid">
+                    
+                    <!-- Card 1 -->
+                    <div class="collection-card">
+                        <div class="card-image-box">
+                            <span class="badge">Limited Edition</span>
+                            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='750' viewBox='0 0 600 750'><rect width='100%' height='100%' fill='%23020705'/><circle cx='300' cy='375' r='190' fill='%23082017' stroke='%23E5C558' stroke-width='6'/><circle cx='300' cy='375' r='170' fill='none' stroke='%23D4AF37' stroke-width='2' stroke-dasharray='4 4'/><circle cx='300' cy='375' r='130' fill='%23020705' stroke='%23F4E8C1' stroke-width='1.5'/><line x1='300' y1='375' x2='300' y2='230' stroke='%23E5C558' stroke-width='4' stroke-linecap='round'/><line x1='300' y1='375' x2='390' y2='375' stroke='%23F4E8C1' stroke-width='3' stroke-linecap='round'/><circle cx='300' cy='375' r='10' fill='%23E5C558'/><circle cx='300' cy='375' r='4' fill='%23020705'/></svg>" 
+                                 alt="The Obsidian Chrono" class="card-img">
+                        </div>
+                        <span class="card-edition">Edition 01 / Automatic</span>
+                        <h3 class="card-title">The Obsidian Chrono</h3>
+                        <p class="card-desc">Features a stunning dark dial, bright golden numbers, and a comfortable hand-stitched leather strap.</p>
+                        <a href="#contact" class="card-link">
+                            <span>Request Specifications</span>
+                            <span class="arrow">→</span>
+                        </a>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="collection-card card-offset">
+                        <div class="card-image-box">
+                            <span class="badge">New Release</span>
+                            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='750' viewBox='0 0 600 750'><rect width='100%' height='100%' fill='%23020705'/><rect x='160' y='235' width='280' height='280' fill='%23082017' stroke='%23D4AF37' stroke-width='6' rx='36'/><circle cx='300' cy='375' r='110' fill='none' stroke='%23E5C558' stroke-width='3'/><circle cx='300' cy='375' r='90' fill='none' stroke='%23F4E8C1' stroke-width='1.5' stroke-dasharray='3 3'/><line x1='300' y1='375' x2='250' y2='325' stroke='%23FFFFFF' stroke-width='4' stroke-linecap='round'/><line x1='300' y1='375' x2='340' y2='400' stroke='%23E5C558' stroke-width='3' stroke-linecap='round'/><circle cx='300' cy='375' r='8' fill='%23D4AF37'/></svg>" 
+                                 alt="Sapphire Monolith" class="card-img">
+                        </div>
+                        <span class="card-edition">Edition 02 / Calendar</span>
+                        <h3 class="card-title">Sapphire Monolith</h3>
+                        <p class="card-desc">Built with a brushed titanium square case and a vibrant moon phase calendar disc in deep sapphire.</p>
+                        <a href="#contact" class="card-link">
+                            <span>Request Specifications</span>
+                            <span class="arrow">→</span>
+                        </a>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="collection-card">
+                        <div class="card-image-box">
+                            <span class="badge">Bespoke Order</span>
+                            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='750' viewBox='0 0 600 750'><rect width='100%' height='100%' fill='%23020705'/><polygon points='300,195 430,275 430,475 300,555 170,475 170,275' fill='%23082017' stroke='%23E5C558' stroke-width='5'/><circle cx='300' cy='375' r='80' fill='none' stroke='%23F4E8C1' stroke-width='2'/><circle cx='300' cy='375' r='40' fill='%23020705' stroke='%23D4AF37' stroke-width='1.5'/><line x1='300' y1='375' x2='350' y2='330' stroke='%23F4E8C1' stroke-width='3' stroke-linecap='round'/><circle cx='300' cy='375' r='8' fill='%23E5C558'/></svg>" 
+                                 alt="Ivory Skeleton" class="card-img">
+                        </div>
+                        <span class="card-edition">Edition 03 / Skeleton</span>
+                        <h3 class="card-title">Ivory Skeleton V8</h3>
+                        <p class="card-desc">An open gear dial showcasing warm golden gears, smooth beveled edges, and clear sapphire back glass.</p>
+                        <a href="#contact" class="card-link">
+                            <span>Request Specifications</span>
+                            <span class="arrow">→</span>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- SAVOIR-FAIRE / CRAFTSMANSHIP SHOWCASE -->
+        <section id="craftsmanship" class="section-padding bg-white border-section-top">
+            <div class="container-max">
+                <div class="craftsmanship-grid">
+                    <div>
+                        <span class="section-tag">Engineering & Artisanship</span>
+                        <h2 class="section-title">Organic Precision in Every Detail</h2>
+                        <p class="section-description" style="max-width: 100%; margin: 1rem 0 1.5rem 0;">
+                            Moving away from cold industrial designs, our timepieces blend natural elements with traditional Swiss watchmaking excellence.
+                        </p>
+                        
+                        <div class="feature-accordion">
+                            <div class="accordion-item active">
+                                <h4 class="accordion-title">Hand-Polished Ceramic Bezels</h4>
+                                <p class="accordion-desc">Created from durable high-density powder, baked at 1,400°C, and finished in sleek metallic colors.</p>
+                            </div>
+                            <div class="accordion-item">
+                                <h4 class="accordion-title">Double-Domed Sapphire Glass</h4>
+                                <p class="accordion-desc">Coated with anti-reflective layers so you can read the time clearly even under bright sunlight.</p>
+                            </div>
+                            <div class="accordion-item">
+                                <h4 class="accordion-title">Sustainable Tannery Leathers</h4>
+                                <p class="accordion-desc">Sourced responsibly from certified green European tanneries using natural plant tanning processes.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Editorial Feature Highlight Box -->
+                    <div class="craft-feature-card">
+                        <div class="corner-ornament corner-ornament-tl"></div>
+                        <div class="corner-ornament corner-ornament-br"></div>
+                        <div class="craft-card-inner">
+                            <span class="craft-number">01</span>
+                            <h3 class="craft-card-title">In-House Calibre 8001</h3>
+                            <p class="craft-card-desc">
+                                Developed over four years, featuring a silicon spring that stays completely unaffected by magnetic fields up to 15,000 Gauss.
+                            </p>
+                            <div class="craft-metrics">
+                                <div>
+                                    <span class="metric-val">28,800</span>
+                                    <span class="metric-lbl">vph Frequency</span>
+                                </div>
+                                <div>
+                                    <span class="metric-val">33</span>
+                                    <span class="metric-lbl">Jewels Installed</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- HERITAGE TIMELINE SECTION -->
+        <section id="heritage" class="section-padding bg-cream border-section-top">
+            <div class="container-narrow">
+                <div style="text-align: center; margin-bottom: 3.5rem;">
+                    <span class="section-tag">Chronology</span>
+                    <h2 class="section-title">Our Modern Journey</h2>
+                </div>
+
+                <div class="timeline-container">
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-node"></div>
+                        <span class="timeline-year">2019 — Genesis</span>
+                        <h3 class="timeline-title">The Geneva Atelier</h3>
+                        <p class="timeline-desc">Started with a single goal: combine classic Swiss watchmaking with clean, royal modern aesthetics.</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-node"></div>
+                        <span class="timeline-year">2022 — Calibre Innovation</span>
+                        <h3 class="timeline-title">Self-Sustaining Movements</h3>
+                        <p class="timeline-desc">Released our custom automatic movement, delivering a solid 72-hour power reserve with lightweight rotors.</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-node"></div>
+                        <span class="timeline-year">Present — Global Flagships</span>
+                        <h3 class="timeline-title">Digital & Physical Boutiques</h3>
+                        <p class="timeline-desc">Opening exclusive flagship galleries and boutique locations across Zurich, Tokyo, and London.</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- BRAND ETHOS / PHILOSOPHY -->
+        <section id="philosophy" class="section-padding bg-forest">
+            <div class="corner-ornament corner-ornament-tl"></div>
+            <div class="corner-ornament corner-ornament-tr"></div>
+            <div class="philosophy-container">
+                <span class="section-tag-light">Our Philosophy</span>
+                <blockquote class="quote-text">
+                    "True luxury doesn't need to shout. It speaks quietly through perfect proportions, elegant tones, and lasting mechanical excellence."
+                </blockquote>
+                <p class="quote-author">— Founders Statement</p>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section id="contact" class="section-padding bg-offwhite border-section-top">
+            <div class="container-max">
+                <div class="contact-grid">
+                    <div>
+                        <span class="section-tag">Direct Inquiries</span>
+                        <h2 class="section-title">Initiate a Conversation</h2>
+                        <p class="section-description" style="margin: 1rem 0 1.5rem 0; max-width: 26rem;">
+                            Whether you want to order a custom watch or book a private appointment, our horology concierge is ready to help you.
+                        </p>
+                        <div class="contact-info-list">
+                            <p><span class="info-label">Concierge Email:</span> atelier@aeterna-horology.com</p>
+                            <p><span class="info-label">Geneva Headquarters:</span> Rue du Rhône 42, 1204 Genève</p>
+                            <p><span class="info-label">Hours:</span> Mon – Fri, 09:00 – 18:00 CET</p>
+                        </div>
+                    </div>
+
+                    <form class="contact-form" onsubmit="handleFormSubmit(event)">
+                        <div class="form-row">
+                            <input type="text" placeholder="FULL NAME" class="form-input" required>
+                            <input type="email" placeholder="EMAIL ADDRESS" class="form-input" required>
+                        </div>
+                        <div>
+                            <select class="form-input form-select" required>
+                                <option value="" disabled selected>SELECT SUBJECT</option>
+                                <option value="bespoke">Bespoke Timepiece Inquiry</option>
+                                <option value="appointment">Private Atelier Appointment</option>
+                                <option value="press">Press & Media Relations</option>
+                            </select>
+                        </div>
+                        <div>
+                            <textarea rows="4" placeholder="YOUR MESSAGE" class="form-textarea" required></textarea>
+                        </div>
+                        <button class="magnetic-btn btn-submit" type="submit">
+                            <span class="btn-text">Send Private Message</span>
+                            <div class="btn-fill"></div>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>© 2026 AETERNA HOROLOGY. ALL RIGHTS RESERVED.</p>
+        <p class="footer-tagline">GENEVA • ZURICH • TOKYO</p>
+    </footer>
+
+    <!-- JS Scripts -->
+    <script>
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            alert('Thank you for your inquiry. Our horology concierge will reach out to you shortly.');
+            e.target.reset();
+        }
+
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+
+        window.scrollTo(0, 0);
+
+        const LenisScroll = (() => {
+          let lenis;
+
+          function init() {
+            lenis = new Lenis({
+              duration: 1.2,
+              easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+              orientation: 'vertical',
+              gestureOrientation: 'vertical',
+              smoothWheel: true,
+              wheelMultiplier: 1,
+              smoothTouch: false,
+              touchMultiplier: 2,
+              infinite: false,
+            });
+
+            lenis.on('scroll', ScrollTrigger.update);
+
+            gsap.ticker.add((time) => {
+              lenis.raf(time * 1000);
+            });
+
+            gsap.ticker.lagSmoothing(0);
+          }
+
+          return {
+            init,
+            getLenis: () => lenis
+          };
+        })();
+
+        window.addEventListener('pageshow', (event) => {
+            window.scrollTo(0, 0);
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+          window.scrollTo(0, 0);
+          
+          gsap.registerPlugin(ScrollTrigger);
+          LenisScroll.init();
+          
+          if (window.matchMedia('(pointer: fine) and (min-width: 1025px)').matches) {
+            initCursor();
+            initMagneticButtons();
+          }
+
+          initAccordion();
+          initPreloader(() => {
+            initScrollAnimations();
+          });
+        });
+
+        function initCursor() {
+          const cursor = document.getElementById('cursor');
+          const follower = document.getElementById('cursor-follower');
+
+          if (!cursor || !follower) return;
+
+          let mouseX = 0, mouseY = 0;
+          let followerX = 0, followerY = 0;
+
+          window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            gsap.set(cursor, { x: mouseX, y: mouseY });
+          });
+
+          gsap.ticker.add(() => {
+            followerX += (mouseX - followerX) * 0.12;
+            followerY += (mouseY - followerY) * 0.12;
+            gsap.set(follower, { x: followerX, y: followerY });
+          });
+
+          document.querySelectorAll('a, button, input, select, textarea, .accordion-item').forEach((el) => {
+            el.addEventListener('mouseenter', () => {
+              gsap.to(follower, { scale: 1.6, borderColor: '#D4AF37', duration: 0.3 });
+            });
+            el.addEventListener('mouseleave', () => {
+              gsap.to(follower, { scale: 1, borderColor: 'rgba(229, 197, 88, 0.4)', duration: 0.3 });
+            });
+          });
+        }
+
+        function initMagneticButtons() {
+          document.querySelectorAll('.magnetic-btn').forEach((btn) => {
+            btn.addEventListener('mousemove', (e) => {
+              const rect = btn.getBoundingClientRect();
+              const x = e.clientX - rect.left - rect.width / 2;
+              const y = e.clientY - rect.top - rect.height / 2;
+
+              gsap.to(btn, {
+                x: x * 0.2,
+                y: y * 0.2,
+                duration: 0.3,
+                ease: 'power2.out'
+              });
+            });
+
+            btn.addEventListener('mouseleave', () => {
+              gsap.to(btn, {
+                x: 0,
+                y: 0,
+                duration: 0.5,
+                ease: 'elastic.out(1, 0.3)'
+              });
+            });
+          });
+        }
+
+        function initAccordion() {
+          const items = document.querySelectorAll('.accordion-item');
+          items.forEach(item => {
+            item.addEventListener('click', () => {
+              items.forEach(i => i.classList.remove('active'));
+              item.classList.add('active');
+            });
+          });
+        }
+
+        function initPreloader(onComplete) {
+          const loader = document.getElementById('loader');
+          const progress = document.getElementById('loader-progress');
+          const percentText = document.getElementById('loader-percent');
+          const brand = document.querySelector('.loader-brand');
+
+          let val = 0;
+          gsap.to(brand, { opacity: 1, duration: 0.8, ease: 'power2.out' });
+
+          const interval = setInterval(() => {
+            val += Math.floor(Math.random() * 5) + 1;
+            if (val > 100) val = 100;
+
+            progress.style.width = `${val}%`;
+            percentText.textContent = `${val < 10 ? '0' + val : val} %`;
+
+            if (val === 100) {
+              clearInterval(interval);
+              setTimeout(() => {
+                gsap.to(loader, {
+                  opacity: 0,
+                  duration: 0.8,
+                  ease: 'power2.inOut',
+                  onComplete: () => {
+                    loader.style.display = 'none';
+                    if (onComplete) onComplete();
+                  }
+                });
+              }, 400);
+            }
+          }, 45);
+        }
+
+        function initScrollAnimations() {
+          gsap.from('.hero-tag', { opacity: 0, y: 20, duration: 0.8, delay: 0.1 });
+          gsap.from('.hero-title', { opacity: 0, y: 30, duration: 1, delay: 0.2 });
+          gsap.from('.hero-desc', { opacity: 0, y: 20, duration: 0.8, delay: 0.4 });
+          gsap.from('.hero-actions', { opacity: 0, y: 20, duration: 0.8, delay: 0.5 });
+          gsap.from('.hero-image-frame', { opacity: 0, scale: 0.96, duration: 1.2, delay: 0.3 });
+
+          gsap.from('.collection-card', {
+            scrollTrigger: {
+              trigger: '#collections',
+              start: 'top 75%'
+            },
+            y: 40,
+            opacity: 0,
+            duration: 0.9,
+            stagger: 0.2,
+            ease: 'power3.out'
+          });
+
+          gsap.utils.toArray('.timeline-item').forEach((item) => {
+            gsap.from(item, {
+              scrollTrigger: {
+                trigger: item,
+                start: 'top 80%'
+              },
+              x: -20,
+              opacity: 0,
+              duration: 0.8,
+              ease: 'power2.out'
+            });
+          });
+
+          gsap.utils.toArray('.quote-text').forEach((quote) => {
+            if (!quote.animated) {
+              quote.animated = true;
+              gsap.from(quote, {
+                scrollTrigger: {
+                  trigger: '#philosophy',
+                  start: 'top 75%'
+                },
+                opacity: 0,
+                y: 25,
+                duration: 1,
+                ease: 'power2.out'
+              });
+            }
+          });
+        }
+    </script>
+</body>
+</html>

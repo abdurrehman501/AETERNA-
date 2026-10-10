@@ -1,0 +1,33 @@
+# Operating system files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor and IDE settings
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Dependencies and build output (for when you add tooling later)
+node_modules/
+dist/
+build/
+.cache/
+
+# Environment variables and secrets - never commit these
+.env
+.env.*
+*.pem
+*.key
+
+# Logs
+*.log
+npm-debug.log*
+
+# Netlify local settings
+.netlify/
+
+# Temporary files
+*.tmp
+*.bak
